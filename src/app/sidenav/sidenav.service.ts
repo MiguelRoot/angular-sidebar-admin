@@ -13,7 +13,7 @@ export class SidenavService {
     },
     {
       title: 'Dashboard',
-      icon: 'fa fa-tachometer-alt',
+      icon: 'menu',
       active: false,
       type: 'dropdown',
       badge: {
@@ -38,7 +38,7 @@ export class SidenavService {
     },
     {
       title: 'E-commerce',
-      icon: 'fa fa-shopping-cart',
+      icon: 'menu',
       active: false,
       type: 'dropdown',
       badge: {
@@ -59,7 +59,7 @@ export class SidenavService {
     },
     {
       title: 'Components',
-      icon: 'far fa-gem',
+      icon: 'menu',
       active: false,
       type: 'dropdown',
       submenus: [
@@ -82,7 +82,7 @@ export class SidenavService {
     },
     {
       title: 'Charts',
-      icon: 'fa fa-chart-line',
+      icon: 'menu',
       active: false,
       type: 'dropdown',
       submenus: [
@@ -101,26 +101,12 @@ export class SidenavService {
       ]
     },
     {
-      title: 'Maps',
-      icon: 'fa fa-globe',
-      active: false,
-      type: 'dropdown',
-      submenus: [
-        {
-          title: 'Google maps',
-        },
-        {
-          title: 'Open street map'
-        }
-      ]
-    },
-    {
       title: 'Extra',
       type: 'header'
     },
     {
       title: 'Documentation',
-      icon: 'fa fa-book',
+      icon: 'menu',
       active: false,
       type: 'simple',
       badge: {
@@ -130,13 +116,7 @@ export class SidenavService {
     },
     {
       title: 'Calendar',
-      icon: 'fa fa-calendar',
-      active: false,
-      type: 'simple'
-    },
-    {
-      title: 'Examples',
-      icon: 'fa fa-folder',
+      icon: 'menu',
       active: false,
       type: 'simple'
     }

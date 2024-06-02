@@ -1,0 +1,94 @@
+<ul class="sidenav">
+  <!-- Iterar sobre cada elemento en data2 -->
+  <ng-container *ngFor="let group of data2">
+    <!-- Renderizar el título del grupo -->
+    <li class="sidenav__group-title">
+      <span class="sidenav__group-title-text">{{ group.title }}</span>
+    </li>
+
+    <!-- Renderizar los elementos del grupo -->
+    <ng-container *ngFor="let item of group.children">
+      <!-- Renderizar el elemento del menú -->
+      <ng-template
+        [ngTemplateOutlet]="menuItem"
+        [ngTemplateOutletContext]="{ $implicit: item, level: 0 }"
+      ></ng-template>
+    </ng-container>
+  </ng-container>
+</ul>
+
+<ng-template #iconDefault>
+  <span class="sidenav__item-icon" [innerHTML]="defaultIcon"></span>
+</ng-template>
+
+<ng-template #menuItem let-item let-level="level">
+  <li class="sidenav__item">
+    <!-- Verificar si el elemento no tiene hijos -->
+    <ng-container *ngIf="!item?.children">
+      <!-- Verificar si el elemento tiene un enlace de router -->
+      <div
+        *ngIf="item.routerLink"
+        [routerLink]="item.routerLink"
+        class="sidenav__link"
+        [ngStyle]="{ 'padding-left': level * 20 + 'px' }"
+      >
+        <!-- Verificar si es el primer nivel y el elemento tiene un icono definido -->
+        <ng-container *ngIf="level === 0 && item.icon; else iconDefault">
+          <span class="sidenav__item-icon" [innerHTML]="item.icon"></span>
+        </ng-container>
+        <!-- Renderizar el título del elemento -->
+        <span class="sidenav__item-title">{{ item.title }}</span>
+      </div>
+      <!-- Si no tiene enlace de router, renderizar como un elemento no enlazado -->
+      <div
+        *ngIf="!item.routerLink"
+        class="sidenav__link"
+        [ngStyle]="{ 'padding-left': level * 20 + 'px' }"
+      >
+        <!-- Verificar si es el primer nivel y el elemento tiene un icono definido -->
+        <ng-container *ngIf="level === 0 && item.icon; else iconDefault">
+          <span class="sidenav__item-icon" [innerHTML]="item.icon"></span>
+        </ng-container>
+        <!-- Renderizar el título del elemento -->
+        <span class="sidenav__item-title">{{ item.title }}</span>
+      </div>
+    </ng-container>
+
+    <!-- Si el elemento tiene hijos -->
+    <ng-container *ngIf="item?.children">
+      <!-- Renderizar el elemento como un botón desplegable -->
+      <div
+        class="sidenav__link"
+        [ngClass]="{ active: getActiveValue(item) }"
+        (click)="toggleVisible(item)"
+        [ngStyle]="{ 'padding-left': level * 20 + 'px' }"
+      >
+        <!-- Verificar si es el primer nivel y el elemento tiene un icono definido -->
+        <ng-container *ngIf="level === 0 && item.icon; else iconDefault">
+          <span class="sidenav__item-icon" [innerHTML]="item.icon"></span>
+        </ng-container>
+        <!-- Renderizar el título del elemento -->
+        <span class="sidenav__item-title">{{ item.title }}</span>
+        <!-- Renderizar el icono de despliegue -->
+        <div class="sidenav__item-down" [ngClass]="{ rotate: item.isOpen }">
+          <span>&#9662;</span>
+        </div>
+      </div>
+
+      <!-- Renderizar la lista de elementos secundarios -->
+      <ul
+        [@slide]="getState(item)"
+        [ngClass]="{ active: getActiveValue(item) }"
+        class="sidenav__wrap"
+      >
+        <ng-container *ngFor="let child of item.children">
+          <!-- Recursivamente renderizar cada elemento secundario -->
+          <ng-template
+            [ngTemplateOutlet]="menuItem"
+            [ngTemplateOutletContext]="{ $implicit: child, level: level + 1 }"
+          ></ng-template>
+        </ng-container>
+      </ul>
+    </ng-container>
+  </li>
+</ng-template>

@@ -1,9 +1,18 @@
 html {
   font-family: 'Roboto', sans-serif;
+  font-size: 14px;
 }
 
 *, ::after, ::before {
   box-sizing: border-box;
+}
+
+li {
+  list-style-type: none;
+}
+ul {
+  padding: 0;
+  margin: 0;
 }
 
 body {

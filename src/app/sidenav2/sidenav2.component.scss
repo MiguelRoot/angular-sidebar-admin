@@ -1,0 +1,43 @@
+.sidenav {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidenav__item {
+  margin: 5px 0;
+}
+
+.sidenav__link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+  transition: padding-left 300ms ease-in-out;
+}
+
+.sidenav__item-title {
+  margin-right: auto;
+}
+
+.sidenav__item-icon {
+  margin-right: 10px;
+}
+
+.sidenav__item-down {
+  transition: transform 300ms ease-in-out;
+  display: flex;
+  align-items: center;
+}
+
+.sidenav__item-down.rotate {
+  transform: rotate(180deg);
+}
+
+.sidenav__wrap {
+  overflow: hidden;
+  transition: height 300ms ease-in-out;
+}

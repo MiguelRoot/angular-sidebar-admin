@@ -7,11 +7,15 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { IconComponent } from './icon/icon.component';
+import { Sidenav2Component } from './sidenav2/sidenav2.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SidenavComponent
+    SidenavComponent,
+    IconComponent,
+    Sidenav2Component
   ],
   imports: [
     BrowserModule,

@@ -1,60 +1,75 @@
-<nav id="sidebar" class="sidebar" [ngClass]="{'sidebar-bg' : hasBackgroundImage()}">
-  <div class="sidebar-content">
-    <ng-scrollbar>
-      <div class="sidebar-header">
-        <a href="#">Pro Sidebar</a>
-      </div>
+<nav id="sidebar" class="sidebar deznav" [ngClass]="{'sidebar-bg' : hasBackgroundImage()}">
 
-<!--      <div class="sidebar-profile">-->
-<!--        <div class="user-pic">-->
-<!--          <img class="img-responsive img-rounded" src="assets/img/user.jpg" alt="User picture">-->
-<!--        </div>-->
-<!--        <div class="user-info">-->
-<!--          <span class="user-name">Jhon-->
-<!--            <strong>Smith</strong>-->
-<!--          </span>-->
-<!--          <span class="user-role">Administrator</span>-->
-<!--          <span class="user-status">-->
-<!--            <i class="fa fa-circle"></i>-->
-<!--            <span>Online</span>-->
-<!--          </span>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="sidebar-search">-->
-<!--        <div>-->
-<!--          <div class="input-group">-->
-<!--            <input type="text" class="form-control search-menu" placeholder="Search...">-->
-<!--            <div class="input-group-append">-->
-<!--              <span class="input-group-text">-->
-<!--                <i class="fa fa-search" aria-hidden="true"></i>-->
-<!--              </span>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-      <div class="sidebar-menu">
-        <ul>
-          <li *ngFor="let menu of menus" [ngClass]="{'active': menu.active , 'sidebar-dropdown':menu.type === 'dropdown' , 'header-menu':menu.type === 'header'}">
-            <span *ngIf="menu.type === 'header'">{{menu.title}}</span>
-            <a *ngIf="menu.type !== 'header'" href="#" (click)='toggle(menu)'>
-              <i class="{{menu.icon}}">Y</i>
-              <span>{{menu.title}}</span>
-              <span *ngIf="menu.badge" class="badge badge-pill" [ngClass]="menu.badge.class">{{menu.badge.text}}</span>
-            </a>
-            <div *ngIf="menu.type === 'dropdown'" class="sidebar-submenu" [@slide]="getState(menu)">
-              <ul>
-                <li *ngFor="let submenu of menu.submenus">
-                  <a href="#"> {{submenu.title}}
-                    <span *ngIf="submenu.badge" class="badge badge-pill" [ngClass]="submenu.badge.class">{{submenu.badge.text}}</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </li>
+
+  <!--  <div class="sidebar-content">-->
+  <!--    <ng-scrollbar>-->
+  <!--      <div class="sidebar-header">-->
+  <!--        <a href="#">Pro Sidebar</a>-->
+  <!--      </div>-->
+
+  <!--      <div class="sidebar-menu">-->
+  <!--        <ul>-->
+  <!--          <li *ngFor="let menu of menus" [ngClass]="{'active': menu.active , 'sidebar-dropdown':menu.type === 'dropdown' , 'header-menu':menu.type === 'header'}">-->
+  <!--            <span *ngIf="menu.type === 'header'">{{menu.title}}</span>-->
+  <!--            <a *ngIf="menu.type !== 'header'" href="#" (click)='toggle(menu)'>-->
+  <!--              <app-icon [name]="menu.icon" />-->
+  <!--              <span class="sidebar-drop__title">{{menu.title}}</span>-->
+  <!--              <div>-->
+  <!--                <span *ngIf="menu.badge" class="badge badge-pill" [ngClass]="menu.badge.class">{{menu.badge.text}}xd</span>-->
+  <!--              </div>-->
+  <!--            </a>-->
+  <!--            <div *ngIf="menu.type === 'dropdown'" class="sidebar-submenu" [@slide]="getState(menu)">-->
+  <!--              <ul>-->
+  <!--                <li *ngFor="let submenu of menu.submenus">-->
+  <!--                  <a href="#"> {{submenu.title}}-->
+  <!--                    <span *ngIf="submenu.badge" class="badge badge-pill" [ngClass]="submenu.badge.class">{{submenu.badge.text}}</span>-->
+  <!--                  </a>-->
+  <!--                </li>-->
+  <!--              </ul>-->
+  <!--            </div>-->
+  <!--          </li>-->
+  <!--        </ul>-->
+  <!--      </div>-->
+  <!--    </ng-scrollbar>-->
+  <!--  </div>-->
+
+
+  <ul class="sidenav">
+    <ng-container *ngFor="let item of data2">
+      <ng-template [ngTemplateOutlet]="menuItem" [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
+    </ng-container>
+  </ul>
+
+  <ng-template #menuItem let-item>
+
+    <li class="sidenav__item">
+
+      @if (!item?.children) {
+        <a class="sidenav__link" href="#">
+          <span class="sidenav__item-title">{{ item.title }}</span>
+        </a>
+      }
+
+      @if (item?.children) {
+        <a class="sidenav__link" href="#" [ngClass]="{'active': getActiveValue(item) }" (click)='toggleVisible(item)'>
+          <app-icon *ngIf="item?.icon" name="menu"/>
+          <span class="sidenav__item-title">{{ item.title }}</span>
+          <div class="sidenav__item-down">
+            <app-icon name="down"/>
+          </div>
+        </a>
+
+        <ul [@slide]="getState(item)" [ngClass]="{'active': getActiveValue(item) }" class="sidenav__wrap">
+          <ng-container *ngFor="let child of item.children">
+            <ng-template [ngTemplateOutlet]="menuItem" [ngTemplateOutletContext]="{ $implicit: child }"></ng-template>
+          </ng-container>
         </ul>
-      </div>
-    </ng-scrollbar>
-  </div>
+      }
+
+    </li>
+  </ng-template>
+
+
   <div class="sidebar-footer">
     <div class="dropdown" dropdown>
 
@@ -75,7 +90,8 @@
             </div>
             <div class="content">
               <div class="notification-detail">Lorem ipsum dolor sit amet consectetur adipisicing
-                elit. In totam explicabo</div>
+                elit. In totam explicabo
+              </div>
               <div class="notification-time">
                 6 minutes ago
               </div>
@@ -89,7 +105,8 @@
             </div>
             <div class="content">
               <div class="notification-detail">Lorem ipsum dolor sit amet consectetur adipisicing
-                elit. In totam explicabo</div>
+                elit. In totam explicabo
+              </div>
               <div class="notification-time">
                 Today
               </div>
@@ -103,7 +120,8 @@
             </div>
             <div class="content">
               <div class="notification-detail">Lorem ipsum dolor sit amet consectetur adipisicing
-                elit. In totam explicabo</div>
+                elit. In totam explicabo
+              </div>
               <div class="notification-time">
                 Yesterday
               </div>
@@ -135,7 +153,8 @@
                 <strong> Jhon doe</strong>
               </div>
               <div class="message-detail">Lorem ipsum dolor sit amet consectetur adipisicing
-                elit. In totam explicabo</div>
+                elit. In totam explicabo
+              </div>
             </div>
           </div>
 
@@ -150,7 +169,8 @@
                 <strong> Jhon doe</strong>
               </div>
               <div class="message-detail">Lorem ipsum dolor sit amet consectetur adipisicing
-                elit. In totam explicabo</div>
+                elit. In totam explicabo
+              </div>
             </div>
           </div>
 
@@ -165,7 +185,8 @@
                 <strong> Jhon doe</strong>
               </div>
               <div class="message-detail">Lorem ipsum dolor sit amet consectetur adipisicing
-                elit. In totam explicabo</div>
+                elit. In totam explicabo
+              </div>
             </div>
           </div>
         </a>
