@@ -1,4 +1,10 @@
-<ul class="sidenav">
+<button (click)="toggleMenuMode()">
+  Cambiar Animación
+  <span style="color: red">
+    <app-icon name="arrow"></app-icon>
+  </span>
+</button>
+<ul class="sidenav" [ngClass]="{ 'sidenav--hover': isHoverMode }">
   <!-- Iterar sobre cada elemento en data2 -->
   <ng-container *ngFor="let group of data2">
     <!-- Renderizar el título del grupo -->

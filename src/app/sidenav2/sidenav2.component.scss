@@ -1,19 +1,25 @@
 .sidenav {
   list-style-type: none;
   padding: 0;
+  max-width: 50%;
 }
 
 .sidenav__item {
   margin: 5px 0;
+  position: relative;
 }
+// app-icon {
+//   width: 40px;
+//   height: 40px;
+// }
 
 .sidenav__link {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  background-color: #007bff;
-  color: white;
+  // background-color: #007bff;
+  color: #111;
   text-decoration: none;
   cursor: pointer;
   transition: padding-left 300ms ease-in-out;
@@ -40,4 +46,15 @@
 .sidenav__wrap {
   overflow: hidden;
   transition: height 300ms ease-in-out;
+}
+
+// hover menu
+.sidenav--hover .sidenav__item:hover > .sidenav__wrap {
+  background-color: red !important;
+  position: absolute;
+  height: auto !important;
+  z-index: 2;
+  overflow: initial !important;
+  top: 0;
+  left: 100%;
 }

@@ -1,0 +1,59 @@
+/* src/app/sidebar/sidebar.component.css */
+.sidebar {
+  width: 250px;
+  height: 100%;
+  background: #333;
+  color: #fff;
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  padding: 20px;
+  transition: transform 0.3s ease, width 0.3s ease;
+}
+
+.sidebar.hidden {
+  transform: translateX(-100%);
+}
+
+.sidebar.collapsed {
+  width: 120px;
+  padding: 20px 10px;
+}
+
+button {
+  background: #444;
+  border: none;
+  color: #fff;
+  padding: 10px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin: 15px 0;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}

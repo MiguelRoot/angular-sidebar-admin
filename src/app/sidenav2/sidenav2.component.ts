@@ -20,6 +20,7 @@ import { Component } from '@angular/core';
   ],
 })
 export class Sidenav2Component {
+  isHoverMode = false; // Modo de menú desplegable
   defaultIcon = '&#x2731;'; // Icono predeterminado para los elementos secundarios
   data2 = [
     {
@@ -89,6 +90,10 @@ export class Sidenav2Component {
   ];
 
   toggleVisible(item: any) {
+    if (this.isHoverMode) {
+      item.isOpen = false;
+      return;
+    }
     if (item.isOpen) {
       this.closeAllChildren(item);
     }
@@ -105,10 +110,19 @@ export class Sidenav2Component {
   }
 
   getState(item: any) {
+    // if (this.isHoverMode && item.children) return 'closed';
     return item.isOpen ? 'open' : 'closed';
   }
 
   getActiveValue(item: any) {
     return item.isOpen;
+  }
+
+  toggleMenuMode() {
+    this.isHoverMode = !this.isHoverMode;
+    this.data2.forEach((item: any) => {
+      item.isOpen = false;
+      this.closeAllChildren(item);
+    });
   }
 }

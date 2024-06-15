@@ -1,0 +1,11 @@
+<!-- src/app/app.component.html -->
+<app-sidebar></app-sidebar>
+<div
+  class="content"
+  [class.full-width]="isSidebarHidden"
+  [class.collapsed]="isSidebarCollapsed"
+>
+  <h1>Welcome to My Sidebar Project</h1>
+  <button (click)="toggleSidebar()">Toggle Sidebar</button>
+  <!-- Contenido principal de la aplicación -->
+</div>

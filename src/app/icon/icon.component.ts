@@ -1,17 +1,57 @@
-import {Component, Input} from '@angular/core';
-
+import { Component, ElementRef, Input, Renderer2 } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-icon',
   templateUrl: './icon.component.html',
-  styleUrl: './icon.component.scss'
+  styleUrl: './icon.component.scss',
 })
 export class IconComponent {
-  @Input() size = 24;
-  @Input() name = 'default';
+  @Input() name: string = '';
+  @Input() size: string = '';
 
-  constructor() { }
+  constructor(
+    private http: HttpClient,
+    private el: ElementRef,
+    private renderer: Renderer2
+  ) {}
 
-  isName() {
-    // return (this.name ==)
+  ngOnInit(): void {
+    this.loadIcon();
+  }
+
+  loadIcon(): void {
+    const iconUrl = `assets/icons/${this.name}.svg`;
+    this.http.get(iconUrl, { responseType: 'text' }).subscribe((svg) => {
+      this.el.nativeElement.innerHTML = svg;
+      const svgElement = this.el.nativeElement.querySelector('svg');
+      if (svgElement) {
+        this.applyContainerStyles(svgElement);
+        this.applySizeStyles(svgElement);
+      }
+    });
+  }
+
+  applyContainerStyles(svgElement: SVGElement): void {
+    // Ensure the SVG inherits the size from the component's container
+    this.renderer.setStyle(svgElement, 'width', '100%');
+    this.renderer.setStyle(svgElement, 'height', '100%');
+  }
+
+  applySizeStyles(svgElement: SVGElement): void {
+    let width, height;
+    switch (this.size) {
+      case 'small':
+        width = '16px';
+        height = '16px';
+        break;
+      case 'large':
+        width = '48px';
+        height = '48px';
+        break;
+      default:
+        width = height = '24px'; // Default size
+    }
+    this.renderer.setStyle(this.el.nativeElement, 'width', width);
+    this.renderer.setStyle(this.el.nativeElement, 'height', height);
   }
 }
