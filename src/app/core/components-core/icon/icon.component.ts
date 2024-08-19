@@ -1,8 +1,9 @@
 import { Component, ElementRef, Input, Renderer2 } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { first } from 'rxjs';
 @Component({
   selector: 'app-icon',
-  templateUrl: './icon.component.html',
+  template: '',
   styleUrl: './icon.component.scss',
 })
 export class IconComponent {
@@ -21,14 +22,17 @@ export class IconComponent {
 
   loadIcon(): void {
     const iconUrl = `assets/icons/${this.name}.svg`;
-    this.http.get(iconUrl, { responseType: 'text' }).subscribe((svg) => {
-      this.el.nativeElement.innerHTML = svg;
-      const svgElement = this.el.nativeElement.querySelector('svg');
-      if (svgElement) {
-        this.applyContainerStyles(svgElement);
-        this.applySizeStyles(svgElement);
-      }
-    });
+    this.http
+      .get(iconUrl, { responseType: 'text' })
+      .pipe(first())
+      .subscribe((svg) => {
+        this.el.nativeElement.innerHTML = svg;
+        const svgElement = this.el.nativeElement.querySelector('svg');
+        if (svgElement) {
+          this.applyContainerStyles(svgElement);
+          this.applySizeStyles(svgElement);
+        }
+      });
   }
 
   applyContainerStyles(svgElement: SVGElement): void {

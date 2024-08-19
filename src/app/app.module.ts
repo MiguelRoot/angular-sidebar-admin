@@ -3,22 +3,20 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SidenavComponent } from './sidenav/sidenav.component';
 
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { IconComponent } from './icon/icon.component';
-import { Sidenav2Component } from './sidenav2/sidenav2.component';
+import { SidenavComponent } from './layout/sidenav/sidenav.component';
 import { Sidenav3Component } from './sidenav3/sidenav3.component';
 import { SidebarComponent } from './sidenav3/sidebar/sidebar.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ComponentsCoreModule } from './core/components-core/components-core.module';
+import { LayoutModule } from './layout/layout.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     SidenavComponent,
-    IconComponent,
-    Sidenav2Component,
     Sidenav3Component,
     SidebarComponent,
   ],
@@ -28,6 +26,8 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     AppRoutingModule,
     NgScrollbarModule,
+    LayoutModule,
+    ComponentsCoreModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

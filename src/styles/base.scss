@@ -1,0 +1,21 @@
+html {
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  color: var(--ion-text-color);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-background);
+}
+
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+// * {
+//   outline: 1px solid red;
+// }

@@ -1,0 +1,114 @@
+<button (click)="changeToggleMenu()">
+  Cambiar Animación
+  <span style="color: red">
+    <app-icon name="arrow"></app-icon>
+  </span>
+</button>
+
+<div class="sidenav" [ngClass]="{ 'sidenav--hover': isHoverMode }">
+  <!-- Iterar sobre cada elemento en data2 -->
+  <ng-container *ngFor="let group of menuData">
+    <!-- Renderizar el título del grupo -->
+    <ng-container *ngIf="!isHoverMode">
+      <div class="sidenav__group-title">
+        <span class="sidenav__group-title-text">{{ group.header }}</span>
+      </div>
+    </ng-container>
+
+    <!-- Renderizar los elementos del grupo -->
+    <ul>
+      <ng-container *ngFor="let item of group.menu">
+        <!-- Renderizar el elemento del menú -->
+        <ng-template
+          [ngTemplateOutlet]="menuItem"
+          [ngTemplateOutletContext]="{ $implicit: item, level: 0 }"
+        ></ng-template>
+      </ng-container>
+    </ul>
+  </ng-container>
+</div>
+
+<ng-template #menuItem let-item let-level="level">
+  <li
+    class="sidenav__item"
+    [appHoverMenu]="isHoverMode"
+    [ngClass]="{ 'sidenav__item-child': level !== 0 }"
+  >
+    <!-- Verificar si el elemento no tiene hijos -->
+    <ng-container *ngIf="!item?.children">
+      <!-- Verificar si el elemento tiene un enlace de router -->
+      <div
+        [routerLink]="item?.routerLink ?? null"
+        class="sidenav__link"
+        [ngStyle]="{ 'padding-left': 12 + level * paddingleft + 'px' }"
+      >
+        <!-- Verificar si es el primer nivel y el elemento tiene un icono definido -->
+        <span class="sidenav__item-icon">
+          <app-icon [name]="hasIcon(item?.icon)"></app-icon>
+        </span>
+        <!-- Renderizar el título del elemento -->
+        <span class="sidenav__item-title">{{ item.title }}</span>
+      </div>
+    </ng-container>
+
+    <!-- Si el elemento tiene hijos -->
+    <ng-container *ngIf="item?.children">
+      <!-- Renderizar el elemento como un botón desplegable -->
+      <div
+        class="sidenav__link"
+        [ngClass]="{ active: isItemExpanded(item) }"
+        (click)="toggleExpanded(item)"
+        [ngStyle]="{ 'padding-left': 12 + level * paddingleft + 'px' }"
+      >
+        <!-- Verificar si es el primer nivel y el elemento tiene un icono definido -->
+        <span class="sidenav__item-icon">
+          <app-icon [name]="hasIcon(item?.icon)"></app-icon>
+        </span>
+        <!-- Renderizar el título del elemento -->
+        <span class="sidenav__item-title">{{ item.title }}</span>
+        <!-- Renderizar el icono de despliegue -->
+        <div class="sidenav__item-down" [ngClass]="{ rotate: item.isExpanded }">
+          <app-icon name="arrow" size="small"></app-icon>
+        </div>
+      </div>
+
+      <!-- Renderizar la lista de elementos secundarios -->
+      <ul
+        [@slide]="getItemState(item)"
+        [ngClass]="{ active: isItemExpanded(item) }"
+        class="sidenav__wrap"
+      >
+        <ng-container *ngFor="let child of item.children">
+          <!-- Recursivamente renderizar cada elemento secundario -->
+          <ng-template
+            [ngTemplateOutlet]="menuItem"
+            [ngTemplateOutletContext]="{ $implicit: child, level: level + 1 }"
+          ></ng-template>
+        </ng-container>
+      </ul>
+    </ng-container>
+  </li>
+</ng-template>
+
+<!-- <div>
+  prueba menu v2
+  <div style="margin: 40px">
+    <div
+      class=""
+      [appHoverWrap]="true"
+      style="position: relative; margin: 30px; position: relative; width: 130px"
+    >
+      MENU HOVER
+      <div
+        class="sidenav__test"
+        style="position: absolute; left: 100%; z-index: 10"
+      >
+        <ul>
+          <li class="">menu 1</li>
+          <li class="">menu 2</li>
+          <li class="">menu 3</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div> -->

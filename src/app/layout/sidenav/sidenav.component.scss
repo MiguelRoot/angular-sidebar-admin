@@ -1,0 +1,136 @@
+.sidenav {
+  padding: 0 16px;
+  max-width: 30%;
+  color: var(--color-text-menu);
+  font-weight: 500;
+  border-right: 1px solid #f1f1f1;
+
+  &__group-title {
+    color: var(--color-header-text-menu);
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    padding: 25px 16px 10px;
+  }
+}
+
+.sidenav__link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 8px 4px 16px;
+  min-height: 44px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: padding-left 300ms ease-in-out;
+  border-radius: 8px;
+  &:hover {
+    background-color: rgba(var(--color-bg-menu-hover-rbg), 0.08);
+    color: var(--color-text-menu-hover);
+  }
+  &.active {
+    background-color: rgba(var(--color-bg-menu-hover-rbg), 0.08);
+  }
+}
+
+.sidenav__item {
+  margin: 5px 0;
+  position: relative;
+}
+
+.sidenav__item-title {
+  margin-right: auto;
+}
+
+.sidenav__item-icon {
+  margin-right: 10px;
+}
+
+.sidenav__item-down {
+  transition: transform 300ms ease-in-out;
+  display: flex;
+  align-items: center;
+  // transform: rotate(90deg);
+}
+
+.sidenav__item-down.rotate {
+  transform: rotate(90deg);
+}
+
+.sidenav__wrap {
+  overflow: hidden;
+  transition: height 300ms ease-in-out;
+}
+
+// start css hover menu
+.sidenav--hover .sidenav__item:hover > .sidenav__wrap {
+  position: absolute;
+  height: auto !important;
+  z-index: 2;
+  overflow: initial !important;
+  // top: 0;
+  left: 100%;
+  border: 1px solid #f1f1f1;
+  border-radius: 8px;
+  min-width: 180px;
+  // margin-left: 21px;
+}
+
+.sidenav--hover {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.sidenav--hover .sidenav__item .sidenav__link {
+  text-align: center;
+  font-size: 11px;
+  display: block;
+  position: relative;
+  // padding: 5px;
+  // background-color: red;
+  margin-left: 4px;
+  margin-right: 4px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.sidenav--hover .sidenav__item-child {
+  .sidenav__link {
+    display: flex;
+    min-height: 34px;
+    font-size: 14px;
+    text-align: start;
+    padding: 8px !important;
+  }
+}
+
+.sidenav--hover .sidenav__item-icon {
+  display: block;
+}
+
+.sidenav--hover .sidenav__item-title {
+  white-space: nowrap;
+}
+
+.sidenav--hover .sidenav__item-child {
+  .sidenav__item-icon {
+    display: none;
+  }
+}
+
+.sidenav--hover .sidenav__item-down {
+  position: absolute;
+  right: 3px;
+  top: 10px;
+}
+
+// .sidenav--hover .sidenav__item:hover > .sidenav__wrap {
+//   .sidenav--hover .sidenav__item-icon {
+//     display: none;
+//   }
+// }
+
+/// menu v2
+.hidden {
+  display: none;
+}

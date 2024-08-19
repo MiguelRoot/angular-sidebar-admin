@@ -1,0 +1,28 @@
+// color base
+:root {
+  --font-size: 0.875rem;
+  --font-family: "Roboto", sans-serif;
+  --color-background: #f9f9fd;
+  --ion-text-color: #1e1e1e;
+}
+
+//generate shade and tint https://colorkit.co/color-shades-generator/5932e3/
+:root {
+  --color-primary: #5932e3;
+  --color-primary-rgb: 89, 50, 227;
+  --color-primary-contrast: #ffffff;
+  --color-primary-contrast-rgb: 255, 255, 255;
+  --color-primary-shade: #4c2ac5;
+  --color-primary-tint: #654fe8;
+}
+
+// color menu;
+:root {
+  --color-text-menu: #637381;
+  --color-text-menu-hover: #1e1e1e;
+
+  --color-header-text-menu: #919eab;
+
+  --color-bg-menu-hover: #ab9191;
+  --color-bg-menu-hover-rbg: 171, 145, 145;
+}
