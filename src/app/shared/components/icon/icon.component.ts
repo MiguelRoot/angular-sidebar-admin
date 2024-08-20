@@ -43,17 +43,23 @@ export class IconComponent {
 
   applySizeStyles(svgElement: SVGElement): void {
     let width, height;
-    switch (this.size) {
-      case 'small':
-        width = '16px';
-        height = '16px';
-        break;
-      case 'large':
-        width = '48px';
-        height = '48px';
-        break;
-      default:
-        width = height = '24px'; // Default size
+    const sizeAsNumber = Number(this.size);
+    if (!isNaN(sizeAsNumber)) {
+      width = `${this.size}px`;
+      height = `${this.size}px`;
+    } else {
+      switch (this.size) {
+        case 'small':
+          width = '16px';
+          height = '16px';
+          break;
+        case 'large':
+          width = '48px';
+          height = '48px';
+          break;
+        default:
+          width = height = '24px'; // Default size
+      }
     }
     this.renderer.setStyle(this.el.nativeElement, 'width', width);
     this.renderer.setStyle(this.el.nativeElement, 'height', height);

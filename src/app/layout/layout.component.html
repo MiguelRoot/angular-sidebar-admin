@@ -1,0 +1,23 @@
+<div class="root">
+  <div class="toolbar-box">
+    <app-toolbar></app-toolbar>
+  </div>
+  <div>
+    <div
+      class="sidebar"
+      [class.hidden]="isHidden"
+      [class.collapsed]="isCollapsed"
+    >
+      <!-- width: isCollapsed ? '64px' : layoutService.WSIDEBAR + 'px' -->
+      <app-sidenav></app-sidenav>
+    </div>
+
+    <div
+      class="content"
+      [class.full-width]="isSidebarHidden"
+      [class.collapsed]="isSidebarMin"
+    >
+      <router-outlet />
+    </div>
+  </div>
+</div>

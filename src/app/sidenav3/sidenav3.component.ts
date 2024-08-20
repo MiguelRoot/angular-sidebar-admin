@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SidebarService } from './sidebar.service';
+import { LayoutService } from '../layout/layout.service';
 
 @Component({
   selector: 'app-sidenav3',
@@ -10,12 +10,12 @@ export class Sidenav3Component {
   isSidebarHidden = false;
   isSidebarCollapsed = false;
 
-  constructor(private sidebarService: SidebarService) {
+  constructor(private sidebarService: LayoutService) {
     this.sidebarService.sidebarVisible$.subscribe((isVisible) => {
       this.isSidebarHidden = !isVisible;
     });
 
-    this.sidebarService.sidebarCollapsed$.subscribe((isCollapsed) => {
+    this.sidebarService.sidebar$.subscribe((isCollapsed) => {
       this.isSidebarCollapsed = isCollapsed;
     });
   }

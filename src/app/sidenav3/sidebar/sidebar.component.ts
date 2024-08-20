@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SidebarService } from '../sidebar.service';
+import { LayoutService } from '../../layout/layout.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -11,12 +11,12 @@ export class SidebarComponent {
   isCollapsed = false;
   showOverlay = false;
 
-  constructor(private sidebarService: SidebarService) {
+  constructor(private sidebarService: LayoutService) {
     this.sidebarService.sidebarVisible$.subscribe((isVisible) => {
       this.isHidden = !isVisible;
     });
 
-    this.sidebarService.sidebarCollapsed$.subscribe((isCollapsed) => {
+    this.sidebarService.sidebar$.subscribe((isCollapsed) => {
       this.isCollapsed = isCollapsed;
     });
 

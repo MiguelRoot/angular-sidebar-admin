@@ -10,11 +10,11 @@ import {
 @Directive({
   selector: '[appHoverMenu]',
 })
-export class HoverWrapDirective {
+export class HoverMenuDirective {
   @Input('appHoverMenu') isEnabled: boolean = true; // Input para habilitar/deshabilitar la directiva
 
   private wrapEl: HTMLElement | null = null;
-  private cleanupAutoUpdate: (() => void) | null = null;
+  // private cleanupAutoUpdate: (() => void) | null = null;
 
   constructor(private el: ElementRef) {}
 
@@ -67,11 +67,10 @@ export class HoverWrapDirective {
     if (!this.isEnabled) return; // Si está deshabilitado, salir del método
     if (this.wrapEl) {
       // this.wrapEl.classList.add('hidden');
-
-      if (this.cleanupAutoUpdate) {
-        this.cleanupAutoUpdate();
-        this.cleanupAutoUpdate = null;
-      }
+      // if (this.cleanupAutoUpdate) {
+      //   this.cleanupAutoUpdate();
+      //   this.cleanupAutoUpdate = null;
+      // }
     }
   }
 }

@@ -1,9 +1,9 @@
 .sidenav {
   padding: 0 16px;
-  max-width: 30%;
+  // max-width: 30%;
   color: var(--color-text-menu);
   font-weight: 500;
-  border-right: 1px solid #f1f1f1;
+  // border-right: 1px solid #f1f1f1;
 
   &__group-title {
     color: var(--color-header-text-menu);
@@ -131,6 +131,6 @@
 // }
 
 /// menu v2
-.hidden {
-  display: none;
-}
+// .hidden {
+//   display: none;
+// }

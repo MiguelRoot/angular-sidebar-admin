@@ -1,9 +1,9 @@
-<button (click)="changeToggleMenu()">
+<!-- <button (click)="changeToggleMenu()">
   Cambiar Animación
   <span style="color: red">
     <app-icon name="arrow"></app-icon>
   </span>
-</button>
+</button> -->
 
 <div class="sidenav" [ngClass]="{ 'sidenav--hover': isHoverMode }">
   <!-- Iterar sobre cada elemento en data2 -->
@@ -89,26 +89,3 @@
     </ng-container>
   </li>
 </ng-template>
-
-<!-- <div>
-  prueba menu v2
-  <div style="margin: 40px">
-    <div
-      class=""
-      [appHoverWrap]="true"
-      style="position: relative; margin: 30px; position: relative; width: 130px"
-    >
-      MENU HOVER
-      <div
-        class="sidenav__test"
-        style="position: absolute; left: 100%; z-index: 10"
-      >
-        <ul>
-          <li class="">menu 1</li>
-          <li class="">menu 2</li>
-          <li class="">menu 3</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div> -->

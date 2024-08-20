@@ -12,6 +12,11 @@ const routes: Routes = [
     path: 'sidenav3',
     component: Sidenav3Component,
   },
+  {
+    path: 'admin',
+    loadChildren: () =>
+      import('./sections/admin/admin.module').then((m) => m.AdminModule),
+  },
 ];
 
 @NgModule({
