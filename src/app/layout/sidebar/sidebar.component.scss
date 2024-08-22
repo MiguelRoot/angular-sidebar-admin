@@ -14,6 +14,16 @@
   }
 }
 
+.sidenav__item {
+  margin: 5px 0;
+  position: relative;
+}
+
+.sidenav__item:hover > .sidenav__link {
+  background-color: rgba(var(--color-bg-menu-hover-rbg), 0.08);
+  // color: var(--color-text-menu-hover);
+}
+
 .sidenav__link {
   display: flex;
   justify-content: space-between;
@@ -25,17 +35,11 @@
   transition: padding-left 300ms ease-in-out;
   border-radius: 8px;
   &:hover {
-    background-color: rgba(var(--color-bg-menu-hover-rbg), 0.08);
-    color: var(--color-text-menu-hover);
+    color: var(--color-primary);
   }
   &.active {
     background-color: rgba(var(--color-bg-menu-hover-rbg), 0.08);
   }
-}
-
-.sidenav__item {
-  margin: 5px 0;
-  position: relative;
 }
 
 .sidenav__item-title {
@@ -66,9 +70,11 @@
 .sidenav--hover .sidenav__item:hover > .sidenav__wrap {
   position: absolute;
   height: auto !important;
-  z-index: 2;
+  z-index: 11;
   overflow: initial !important;
   // top: 0;
+  background-color: rgba(var(--color-background-rgb), 0.3);
+  backdrop-filter: blur(10px);
   left: 100%;
   border: 1px solid #f1f1f1;
   border-radius: 8px;
@@ -86,12 +92,15 @@
   font-size: 11px;
   display: block;
   position: relative;
-  // padding: 5px;
-  // background-color: red;
   margin-left: 4px;
   margin-right: 4px;
   padding-top: 8px;
   padding-bottom: 8px;
+}
+
+// hover de menu anidado
+.sidenav--hover .sidenav__item:hover > .sidenav__link {
+  color: var(--color-primary);
 }
 
 .sidenav--hover .sidenav__item-child {
@@ -123,14 +132,3 @@
   right: 3px;
   top: 10px;
 }
-
-// .sidenav--hover .sidenav__item:hover > .sidenav__wrap {
-//   .sidenav--hover .sidenav__item-icon {
-//     display: none;
-//   }
-// }
-
-/// menu v2
-// .hidden {
-//   display: none;
-// }

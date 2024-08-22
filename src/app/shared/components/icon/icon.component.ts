@@ -1,4 +1,10 @@
-import { Component, ElementRef, Input, Renderer2 } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  Renderer2,
+  SimpleChanges,
+} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { first } from 'rxjs';
 @Component({
@@ -18,6 +24,12 @@ export class IconComponent {
 
   ngOnInit(): void {
     this.loadIcon();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['name']) {
+      this.loadIcon();
+    }
   }
 
   loadIcon(): void {

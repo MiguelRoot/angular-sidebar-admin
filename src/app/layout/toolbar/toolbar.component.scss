@@ -1,9 +1,9 @@
 .toolbar {
-  background: #fff;
-  color: #333;
+  // background: #fff;
+  color: var(--color-text-menu);
   height: 100%;
   display: flex;
-  justify-content: space-between;
+  // justify-content: space-between;
   align-items: center;
   width: 100%;
 }
@@ -19,10 +19,33 @@
   padding: 0;
   margin: 0;
   border-radius: 50%;
+  transition: background-color 0.3s ease;
   &:hover {
-    background: #f3f4f5;
+    background-color: rgba(var(--color-bg-menu-hover-rbg), 0.08);
+    backdrop-filter: blur(10px);
+    color: var(--color-text-menu-hover);
+    transform: scale(1.05);
+  }
+  &:active {
+    transform: scale(0.95);
   }
   &.active {
-    background: #f3f4f5;
+    background-color: rgba(var(--color-bg-menu-hover-rbg), 0.08);
+    backdrop-filter: blur(10px);
   }
+}
+
+.toolbar-menu {
+  width: 100%;
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 16px;
+}
+
+.logobar {
+  flex: 0 0 auto;
+  height: 100%;
+  transition: width 0.3s ease;
 }

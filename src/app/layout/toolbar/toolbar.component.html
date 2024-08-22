@@ -1,11 +1,15 @@
 <div class="toolbar">
-  <div>LOGO</div>
-  <div>
-    <div class="toolbar-button active" (click)="toggleSidebar()">
-      <app-icon name="menu-line" size="26"></app-icon>
+  <div class="logobar" [ngStyle]="logobarStyles">
+    <app-logobar></app-logobar>
+  </div>
+
+  <div class="toolbar-menu">
+    <div class="toolbar-button" (click)="toggleSidebar()">
+      <app-icon [name]="isCampactMode" size="24"></app-icon>
     </div>
-    <!-- <div class="toolbar-button active" (click)="toggleSidebar()">
-      <app-icon name="menu-line" size="26"></app-icon>
-    </div> -->
+
+    <div class="toolbar-button">
+      <app-icon name="user"></app-icon>
+    </div>
   </div>
 </div>

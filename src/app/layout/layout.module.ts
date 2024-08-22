@@ -4,15 +4,17 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { LayoutComponent } from './layout.component';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { SidenavComponent } from './sidenav/sidenav.component';
 import { SharedModule } from '../shared/shared.module';
+import { LogobarComponent } from './logobar/logobar.component';
+import { SidebarComponent } from './sidebar/sidenav.component';
 
 @NgModule({
   declarations: [
     HoverMenuDirective,
     ToolbarComponent,
     LayoutComponent,
-    SidenavComponent,
+    SidebarComponent,
+    LogobarComponent,
   ],
   imports: [CommonModule, RouterModule, SharedModule],
   exports: [HoverMenuDirective],

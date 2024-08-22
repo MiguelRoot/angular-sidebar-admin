@@ -1,0 +1,15 @@
+@import "./mixin/google-fonts";
+
+@include googleFont(
+  (
+    "name": "PublicSans",
+    "folder": "Public_Sans",
+    "files": "PublicSans",
+    "weights": (
+      400,
+      500,
+      600,
+      700,
+    ),
+  )
+);

@@ -1,23 +1,58 @@
+<svg
+  class="backgroundsvg"
+  width="630"
+  height="489"
+  viewBox="0 0 630 489"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <g opacity="0.3" filter="url(#filter0_f_8710_4643)">
+    <path
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M473.112 43.8732C455.709 98.5464 415.875 140.371 379.796 184.957C348.712 223.372 315.585 257.616 276.114 287.324C232.149 320.414 190.687 366.466 135.729 368.656C80.5928 370.853 34.2898 329.958 -11.26 298.775C-54.0865 269.457 -84.5806 229.059 -121.498 192.564C-172.025 142.614 -259.224 114.274 -269.108 43.8732C-278.662 -24.1845 -209.302 -77.0082 -166.936 -131.083C-129.388 -179.008 -87.4767 -221.457 -35.9091 -253.774C17.0432 -286.959 73.9221 -329.855 135.729 -320.763C197.434 -311.686 223.671 -232.899 280.524 -207.225C346.804 -177.295 445.587 -218.578 489.871 -160.84C532.243 -105.596 494.238 -22.4911 473.112 43.8732Z"
+      fill="currentColor"
+      fill-opacity="0.3"
+    />
+  </g>
+  <defs>
+    <filter
+      id="filter0_f_8710_4643"
+      x="-390"
+      y="-442"
+      width="1019.06"
+      height="930.741"
+      filterUnits="userSpaceOnUse"
+      color-interpolation-filters="sRGB"
+    >
+      <feFlood flood-opacity="0" result="BackgroundImageFix" />
+      <feBlend
+        mode="normal"
+        in="SourceGraphic"
+        in2="BackgroundImageFix"
+        result="shape"
+      />
+      <feGaussianBlur
+        stdDeviation="60"
+        result="effect1_foregroundBlur_8710_4643"
+      />
+    </filter>
+  </defs>
+</svg>
+
 <div class="root">
   <div class="toolbar-box">
     <app-toolbar></app-toolbar>
   </div>
   <div>
-    <div
-      class="sidebar"
-      [class.hidden]="isHidden"
-      [class.collapsed]="isCollapsed"
-    >
+    <div class="sidebar" [ngStyle]="sidebarStyles">
       <!-- width: isCollapsed ? '64px' : layoutService.WSIDEBAR + 'px' -->
-      <app-sidenav></app-sidenav>
+      <app-sidebar></app-sidebar>
     </div>
 
-    <div
-      class="content"
-      [class.full-width]="isSidebarHidden"
-      [class.collapsed]="isSidebarMin"
-    >
+    <div class="content" [ngStyle]="contentStyles">
       <router-outlet />
     </div>
   </div>
+  <div class="overlay-menu" *ngIf="overlayShow" (click)="toggleSidebar()"></div>
 </div>

@@ -10,3 +10,9 @@ export interface IMenuItem {
   routerLink?: string;
   children?: IMenuItem[];
 }
+
+export enum ISidebarState {
+  Hidden,
+  Compact,
+  Expanded,
+}

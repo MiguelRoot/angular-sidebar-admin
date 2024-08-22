@@ -1,19 +1,22 @@
 // color base
 :root {
   --font-size: 0.875rem;
-  --font-family: "Roboto", sans-serif;
-  --color-background: #f9fcfd;
+  --font-family: "PublicSans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  // --color-background: #f9fcfd;
+  --color-background: #fff;
+  --color-background-rgb: 249, 252, 253;
   --ion-text-color: #1e1e1e;
 }
 
 //generate shade and tint https://colorkit.co/color-shades-generator/5932e3/
 :root {
-  --color-primary: #5932e3;
+  --color-primary: #6944e3;
   --color-primary-rgb: 89, 50, 227;
   --color-primary-contrast: #ffffff;
   --color-primary-contrast-rgb: 255, 255, 255;
-  --color-primary-shade: #4c2ac5;
-  --color-primary-tint: #654fe8;
+  --color-primary-shade: #5a3ac5;
+  --color-primary-tint: #755be8;
 }
 
 // color menu;
@@ -24,5 +27,5 @@
   --color-header-text-menu: #919eab;
 
   --color-bg-menu-hover: #ab9191;
-  --color-bg-menu-hover-rbg: 171, 145, 145;
+  --color-bg-menu-hover-rbg: 145, 158, 171;
 }

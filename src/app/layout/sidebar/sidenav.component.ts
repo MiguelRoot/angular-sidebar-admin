@@ -5,14 +5,15 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { IMenuHeader, IMenuItem } from '../layout.model';
+import { LayoutService } from '../layout.service';
 //https://chatgpt.com/c/25e3444f-80d1-48bc-8a37-65c99a67e951
 
 @Component({
-  selector: 'app-sidenav',
-  templateUrl: './sidenav.component.html',
-  styleUrl: './sidenav.component.scss',
+  selector: 'app-sidebar',
+  templateUrl: './sidebar.component.html',
+  styleUrl: './sidebar.component.scss',
   animations: [
     trigger('slide', [
       state('closed', style({ height: '0px', overflow: 'hidden' })),
@@ -21,10 +22,11 @@ import { IMenuHeader, IMenuItem } from '../layout.model';
     ]),
   ],
 })
-export class SidenavComponent {
-  isHoverMode = false; // Modo de menú desplegable
+export class SidebarComponent {
+  layoutService = inject(LayoutService);
+  isHoverMode = false; // Modo de menú Compact=true
   iconDefault = 'bullet'; // Icono predeterminado para los elementos secundarios
-  paddingleft = 12;
+  paddingleft = 12; // Espaciado a la izquierda de los elementos secundarios
   menuData: IMenuHeader[] = [
     {
       header: 'MENU',
@@ -89,6 +91,17 @@ export class SidenavComponent {
       ],
     },
   ];
+
+  ngOnInit() {
+    this.layoutService.getSidebarState().subscribe(() => {
+      if (this.isHoverMode !== this.layoutService.getSidebarSatatusMenu()) {
+        this.menuData.forEach((item: IMenuHeader) => {
+          this.hideAllChildItems(item.menu);
+        });
+      }
+      this.isHoverMode = this.layoutService.getSidebarSatatusMenu();
+    });
+  }
 
   /**
    * Cambia el estado expandido de un elemento de menú.

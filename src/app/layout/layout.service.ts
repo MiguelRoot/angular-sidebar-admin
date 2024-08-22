@@ -1,60 +1,184 @@
 // src/app/sidebar.service.ts
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { ISidebarState } from './layout.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LayoutService {
-  public BREAKPOINTMD = 770;
-  public BREAKPOINTLG = 1024;
+  private readonly BREAKPOINTMD = 770;
+  private readonly BREAKPOINTLG = 1024;
 
-  public WSIDEBARMIN = 120;
-  public WSIDEBAR = 250;
+  private readonly WSIDEBARCOMPACT = 100;
+  private readonly WSIDEBAREXPANDED = 250;
 
-  private wSidebarMargin = new BehaviorSubject<number>(0);
-  wSidebarMargin$ = this.wSidebarMargin.asObservable();
-
-  private sidebarVisible = new BehaviorSubject<boolean>(true);
-  sidebarVisible$ = this.sidebarVisible.asObservable();
-
-  private sidebar = new BehaviorSubject<boolean>(false);
-  sidebar$ = this.sidebar.asObservable();
-
-  private showOverlay = new BehaviorSubject<boolean>(false);
-  showOverlay$ = this.showOverlay.asObservable();
+  private sidebarState = new BehaviorSubject<ISidebarState>(
+    ISidebarState.Hidden
+  );
 
   constructor() {
-    this.updateSidebarState(window.innerWidth);
-    window.addEventListener('resize', this.onResize.bind(this));
+    this.updateSidebarState();
+    window.addEventListener('resize', () => this.updateSidebarState());
   }
 
+  getSidebarState() {
+    return this.sidebarState.asObservable();
+  }
+
+  // toggle sidebar
   toggleSidebar() {
-    if (window.innerWidth >= this.BREAKPOINTMD) {
-      this.sidebar.next(!this.sidebar.value);
+    const screenWidth = window.innerWidth;
+    const currentState = this.sidebarState.value;
+
+    if (screenWidth >= this.BREAKPOINTMD) {
+      // Alternar entre Expanded y Compact en pantallas medianas y grandes
+      this.sidebarState.next(
+        currentState === ISidebarState.Expanded
+          ? ISidebarState.Compact
+          : ISidebarState.Expanded
+      );
     } else {
-      this.showOverlay.next(!this.showOverlay.value);
-      this.sidebarVisible.next(!this.sidebarVisible.value);
+      // Alternar entre Hidden y Expanded en pantallas pequeñas
+      this.sidebarState.next(
+        currentState === ISidebarState.Hidden
+          ? ISidebarState.Expanded
+          : ISidebarState.Hidden
+      );
     }
   }
 
-  private onResize() {
-    this.updateSidebarState(window.innerWidth);
+  getSidebarWidth() {
+    const currentState = this.sidebarState.value;
+
+    switch (currentState) {
+      case ISidebarState.Expanded:
+        return this.WSIDEBAREXPANDED;
+      case ISidebarState.Compact:
+        return this.WSIDEBARCOMPACT;
+      case ISidebarState.Hidden:
+      default:
+        return this.WSIDEBAREXPANDED;
+    }
   }
 
-  private updateSidebarState(width: number) {
-    if (width < this.BREAKPOINTMD) {
-      this.sidebarVisible.next(false);
-      this.sidebar.next(false);
-      this.showOverlay.next(false);
-    } else if (width >= this.BREAKPOINTMD && width < this.BREAKPOINTLG) {
-      this.sidebarVisible.next(true);
-      this.sidebar.next(true);
-      this.showOverlay.next(false);
-      this.wSidebarMargin.next(this.WSIDEBARMIN);
+  getSidebarStyles() {
+    const width = `${this.getSidebarWidth()}px`;
+    const currentState = this.sidebarState.value;
+    return {
+      width: width,
+      // position: window.innerWidth < this.BREAKPOINTMD ? 'fixed' : 'relative',
+      // display: currentState === ISidebarState.Hidden ? 'none' : 'block',
+      transform:
+        currentState === ISidebarState.Hidden
+          ? 'translateX(-100%)'
+          : 'translateX(0)',
+    };
+  }
+
+  /**
+   * Cambia el menu de compact = false, expanded = true.
+   *
+   * @returns {boolean} `true` si el estado de la barra lateral está expandido, de lo contrario `false`.
+   */
+  getSidebarSatatusMenu(): boolean {
+    const screenWidth = window.innerWidth;
+    const currentState = this.sidebarState.value;
+
+    if (screenWidth < this.BREAKPOINTMD) {
+      return false;
+    }
+
+    let marginLeft = true;
+    if (currentState === ISidebarState.Expanded) {
+      marginLeft = false;
+    } else if (currentState === ISidebarState.Compact) {
+      marginLeft = true;
+    }
+
+    return marginLeft;
+  }
+
+  getTextMenuShow() {
+    const screenWidth = window.innerWidth;
+    const currentState = this.sidebarState.value;
+    if (screenWidth < this.BREAKPOINTMD) {
+      return false;
+    }
+    if (currentState === ISidebarState.Compact) {
+      return false;
+    }
+    return true;
+  }
+
+  getIconMenu(): string {
+    const screenWidth = window.innerWidth;
+    const currentState = this.sidebarState.value;
+
+    if (
+      currentState === ISidebarState.Expanded &&
+      screenWidth < this.BREAKPOINTMD
+    ) {
+      return 'arrow-left';
+    } else if (currentState === ISidebarState.Compact) {
+      return 'menu-right';
     } else {
-      this.wSidebarMargin.next(this.WSIDEBAR);
-      this.sidebarVisible.next(true);
+      return 'menu-line';
+    }
+  }
+
+  getLogoBarStyles() {
+    const screenWidth = window.innerWidth;
+    const currentState = this.sidebarState.value;
+    let width = `${this.WSIDEBARCOMPACT}px`;
+
+    if (screenWidth >= this.BREAKPOINTMD) {
+      width =
+        currentState === ISidebarState.Expanded
+          ? `${this.WSIDEBAREXPANDED}px`
+          : `${this.WSIDEBARCOMPACT}px`;
+    }
+    return { width: width };
+  }
+
+  getContentStyles() {
+    const screenWidth = window.innerWidth;
+    const currentState = this.sidebarState.value;
+
+    if (screenWidth < this.BREAKPOINTMD) {
+      return { marginLeft: '0px' };
+    }
+
+    let marginLeft = '0px';
+    if (currentState === ISidebarState.Expanded) {
+      marginLeft = `${this.WSIDEBAREXPANDED}px`;
+    } else if (currentState === ISidebarState.Compact) {
+      marginLeft = `${this.WSIDEBARCOMPACT}px`;
+    }
+
+    return { marginLeft: marginLeft };
+  }
+
+  getOverlayShow() {
+    const screenWidth = window.innerWidth;
+    if (
+      screenWidth < this.BREAKPOINTMD &&
+      this.sidebarState.value === ISidebarState.Expanded
+    ) {
+      return true;
+    }
+    return false;
+  }
+
+  private updateSidebarState() {
+    const screenWidth = window.innerWidth;
+
+    if (screenWidth < this.BREAKPOINTMD) {
+      this.sidebarState.next(ISidebarState.Hidden);
+    } else if (screenWidth < this.BREAKPOINTLG) {
+      this.sidebarState.next(ISidebarState.Compact);
+    } else {
+      this.sidebarState.next(ISidebarState.Expanded);
     }
   }
 }

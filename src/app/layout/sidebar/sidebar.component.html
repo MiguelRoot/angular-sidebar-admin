@@ -1,10 +1,3 @@
-<!-- <button (click)="changeToggleMenu()">
-  Cambiar Animación
-  <span style="color: red">
-    <app-icon name="arrow"></app-icon>
-  </span>
-</button> -->
-
 <div class="sidenav" [ngClass]="{ 'sidenav--hover': isHoverMode }">
   <!-- Iterar sobre cada elemento en data2 -->
   <ng-container *ngFor="let group of menuData">
@@ -44,7 +37,7 @@
       >
         <!-- Verificar si es el primer nivel y el elemento tiene un icono definido -->
         <span class="sidenav__item-icon">
-          <app-icon [name]="hasIcon(item?.icon)"></app-icon>
+          <app-icon [name]="hasIcon(item?.icon)" size="26"></app-icon>
         </span>
         <!-- Renderizar el título del elemento -->
         <span class="sidenav__item-title">{{ item.title }}</span>
@@ -62,7 +55,7 @@
       >
         <!-- Verificar si es el primer nivel y el elemento tiene un icono definido -->
         <span class="sidenav__item-icon">
-          <app-icon [name]="hasIcon(item?.icon)"></app-icon>
+          <app-icon [name]="hasIcon(item?.icon)" size="26"></app-icon>
         </span>
         <!-- Renderizar el título del elemento -->
         <span class="sidenav__item-title">{{ item.title }}</span>

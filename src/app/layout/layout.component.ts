@@ -8,39 +8,19 @@ import { LayoutService } from './layout.service';
 })
 export class LayoutComponent implements OnInit {
   layoutService = inject(LayoutService);
-
-  isHidden = false;
-  showOverlay = false;
-  isCollapsed = false;
-
-  ///
-  isSidebarHidden = false;
-  // true sidebarmini;
-  isSidebarMin = false;
-
-  fullWidth = this.isSidebarHidden ? '0' : '250px';
+  sidebarStyles: any;
+  contentStyles: any;
+  overlayShow = false;
 
   ngOnInit() {
-    this.layoutService.sidebarVisible$.subscribe((isVisible) => {
-      this.isSidebarHidden = !isVisible;
+    this.layoutService.getSidebarState().subscribe(() => {
+      this.sidebarStyles = this.layoutService.getSidebarStyles();
+      this.contentStyles = this.layoutService.getContentStyles();
+      this.overlayShow = this.layoutService.getOverlayShow();
     });
+  }
 
-    this.layoutService.sidebar$.subscribe((isCollapsed) => {
-      console.log('isCollapsed', isCollapsed);
-      this.isSidebarMin = isCollapsed;
-    });
-
-    // sidebar
-    this.layoutService.sidebarVisible$.subscribe((isVisible) => {
-      this.isHidden = !isVisible;
-    });
-
-    this.layoutService.sidebar$.subscribe((isCollapsed) => {
-      this.isCollapsed = isCollapsed;
-    });
-
-    this.layoutService.showOverlay$.subscribe((showOverlay) => {
-      this.showOverlay = showOverlay;
-    });
+  toggleSidebar() {
+    this.layoutService.toggleSidebar();
   }
 }
