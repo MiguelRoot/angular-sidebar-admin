@@ -1,7 +1,7 @@
 html {
   font-family: var(--font-family);
   font-size: var(--font-size);
-  color: var(--ion-text-color);
+  color: var(--color-text-color);
 }
 
 body {
@@ -15,7 +15,3 @@ body {
 ::before {
   box-sizing: border-box;
 }
-
-// * {
-//   outline: 1px solid red;
-// }

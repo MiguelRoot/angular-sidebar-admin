@@ -1,8 +1,15 @@
+// div[app-scroll] {
+//   max-height: 400px; /* Ajusta según tus necesidades */
+//   overflow: auto;
+// }
+
 .sidenav {
   padding: 0 16px;
   // max-width: 30%;
   color: var(--color-text-menu);
   font-weight: 500;
+  // overflow-y: scroll;
+  max-height: calc(100vh - 72px);
   // border-right: 1px solid #f1f1f1;
 
   &__group-title {
@@ -16,7 +23,7 @@
 
 .sidenav__item {
   margin: 5px 0;
-  position: relative;
+  // position: relative;
 }
 
 .sidenav__item:hover > .sidenav__link {

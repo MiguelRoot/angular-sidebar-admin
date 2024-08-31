@@ -6,6 +6,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./sections/admin/admin.module').then((m) => m.AdminModule),
   },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./sections/auth/auth.module').then((m) => m.AuthModule),
+  },
 ];
 
 @NgModule({

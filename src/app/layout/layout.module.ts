@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { LogobarComponent } from './logobar/logobar.component';
 import { SidebarComponent } from './sidebar/sidenav.component';
-
+import { OverlayscrollbarsModule } from 'overlayscrollbars-ngx';
 @NgModule({
   declarations: [
     HoverMenuDirective,
@@ -16,7 +16,7 @@ import { SidebarComponent } from './sidebar/sidenav.component';
     SidebarComponent,
     LogobarComponent,
   ],
-  imports: [CommonModule, RouterModule, SharedModule],
+  imports: [CommonModule, RouterModule, SharedModule, OverlayscrollbarsModule],
   exports: [HoverMenuDirective],
 })
 export class LayoutModule {}

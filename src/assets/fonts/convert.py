@@ -5,7 +5,7 @@ import os
 current_folder = os.path.dirname(os.path.abspath(__file__))
 
 # Carpeta de salida dentro de la carpeta actual
-output_folder = os.path.join(current_folder, "conver")
+output_folder = os.path.join(current_folder, "convert")
 
 # Crea la carpeta de salida si no existe
 if not os.path.exists(output_folder):

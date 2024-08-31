@@ -2,8 +2,14 @@
 @import "./styles/normalize.scss";
 @import "./styles/fonts.scss";
 @import "./styles/base.scss";
-
+@import "./styles/scroll";
+@import "./styles/components/buttons.scss";
 /* You can add global styles to this file, and also import other style files */
-.page-wrapper.toggled .sidebar {
-  left: -300px;
+// .page-wrapper.toggled .sidebar {
+//   left: -300px;
+// }
+
+[data-overlayscrollbars-padding],
+[data-overlayscrollbars-viewport]:not([data-overlayscrollbars]) {
+  position: inherit !important;
 }

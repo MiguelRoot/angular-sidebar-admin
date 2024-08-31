@@ -1,24 +1,33 @@
-<div class="sidenav" [ngClass]="{ 'sidenav--hover': isHoverMode }">
-  <!-- Iterar sobre cada elemento en data2 -->
-  <ng-container *ngFor="let group of menuData">
-    <!-- Renderizar el título del grupo -->
-    <ng-container *ngIf="!isHoverMode">
-      <div class="sidenav__group-title">
-        <span class="sidenav__group-title-text">{{ group.header }}</span>
-      </div>
-    </ng-container>
+<div style="position: relative">
+  <div
+    overlay-scrollbars
+    [options]="currentOptionsScroll"
+    [defer]="true"
+    style="position: initial !important"
+  >
+    <div class="sidenav" [ngClass]="{ 'sidenav--hover': isHoverMode }">
+      <!-- Iterar sobre cada elemento en data2 -->
+      <ng-container *ngFor="let group of menuData">
+        <!-- Renderizar el título del grupo -->
+        <ng-container *ngIf="!isHoverMode">
+          <div class="sidenav__group-title">
+            <span class="sidenav__group-title-text">{{ group.header }}</span>
+          </div>
+        </ng-container>
 
-    <!-- Renderizar los elementos del grupo -->
-    <ul>
-      <ng-container *ngFor="let item of group.menu">
-        <!-- Renderizar el elemento del menú -->
-        <ng-template
-          [ngTemplateOutlet]="menuItem"
-          [ngTemplateOutletContext]="{ $implicit: item, level: 0 }"
-        ></ng-template>
+        <!-- Renderizar los elementos del grupo -->
+        <ul>
+          <ng-container *ngFor="let item of group.menu">
+            <!-- Renderizar el elemento del menú -->
+            <ng-template
+              [ngTemplateOutlet]="menuItem"
+              [ngTemplateOutletContext]="{ $implicit: item, level: 0 }"
+            ></ng-template>
+          </ng-container>
+        </ul>
       </ng-container>
-    </ul>
-  </ng-container>
+    </div>
+  </div>
 </div>
 
 <ng-template #menuItem let-item let-level="level">
@@ -33,7 +42,10 @@
       <div
         [routerLink]="item?.routerLink ?? null"
         class="sidenav__link"
-        [ngStyle]="{ 'padding-left': 12 + level * paddingleft + 'px' }"
+        [ngStyle]="{
+          'padding-left': 12 + level * paddingleft + 'px',
+          'min-height': level === 0 ? '44px' : '36px'
+        }"
       >
         <!-- Verificar si es el primer nivel y el elemento tiene un icono definido -->
         <span class="sidenav__item-icon">
@@ -51,7 +63,10 @@
         class="sidenav__link"
         [ngClass]="{ active: isItemExpanded(item) }"
         (click)="toggleExpanded(item)"
-        [ngStyle]="{ 'padding-left': 12 + level * paddingleft + 'px' }"
+        [ngStyle]="{
+          'padding-left': 12 + level * paddingleft + 'px',
+          'min-height': level === 0 ? '44px' : '36px'
+        }"
       >
         <!-- Verificar si es el primer nivel y el elemento tiene un icono definido -->
         <span class="sidenav__item-icon">
