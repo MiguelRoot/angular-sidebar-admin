@@ -7,11 +7,11 @@ import { ISidebarState } from './layout.model';
   providedIn: 'root',
 })
 export class LayoutService {
-  private readonly BREAKPOINTMD = 770;
-  private readonly BREAKPOINTLG = 1024;
+  private readonly BREAKPOINTMD = 770; // breakpoint para pantallas medianas
+  private readonly BREAKPOINTLG = 1024; // breakpoint para pantallas grandes
 
-  private readonly WSIDEBARCOMPACT = 100;
-  private readonly WSIDEBAREXPANDED = 250;
+  private readonly WSIDEBARCOMPACT = 100; // ancho de la barra lateral compacta
+  private readonly WSIDEBAREXPANDED = 250; // ancho de la barra lateral expandida
 
   private sidebarState = new BehaviorSubject<ISidebarState>(
     ISidebarState.Hidden
@@ -22,11 +22,31 @@ export class LayoutService {
     window.addEventListener('resize', () => this.updateSidebarState());
   }
 
+  /**
+   * Obtiene el estado actual de la barra lateral como un observable.
+   *
+   * @returns {Observable<any>} Un observable que emite el estado de la barra lateral.
+   */
   getSidebarState() {
     return this.sidebarState.asObservable();
   }
 
-  // toggle sidebar
+  /**
+   * Alterna el estado de la barra lateral (sidebar) basado en el ancho de la pantalla.
+   *
+   * - En pantallas medianas y grandes (ancho mayor o igual a `BREAKPOINTMD`), alterna entre
+   *   los estados `Expanded` y `Compact`.
+   * - En pantallas pequeñas (ancho menor a `BREAKPOINTMD`), alterna entre los estados
+   *   `Hidden` y `Expanded`.
+   *
+   * @remarks
+   * Utiliza el ancho de la ventana (`window.innerWidth`) para determinar el tamaño de la pantalla.
+   *
+   * @example
+   * ```typescript
+   * this.toggleSidebar();
+   * ```
+   */
   toggleSidebar() {
     const screenWidth = window.innerWidth;
     const currentState = this.sidebarState.value;
@@ -48,6 +68,14 @@ export class LayoutService {
     }
   }
 
+  /**
+   * Obtiene el ancho de la barra lateral basado en el estado actual de la misma.
+   *
+   * @returns {number} El ancho de la barra lateral dependiendo de su estado:
+   * - `ISidebarState.Expanded`: retorna `WSIDEBAREXPANDED`.
+   * - `ISidebarState.Compact`: retorna `WSIDEBARCOMPACT`.
+   * - `ISidebarState.Hidden` o cualquier otro valor: retorna `WSIDEBAREXPANDED`.
+   */
   getSidebarWidth() {
     const currentState = this.sidebarState.value;
 
@@ -62,6 +90,15 @@ export class LayoutService {
     }
   }
 
+  /**
+   * Obtiene los estilos del sidebar.
+   *
+   * @returns Un objeto con los estilos del sidebar, incluyendo el ancho y la transformación.
+   * El ancho se calcula en píxeles basado en el ancho del sidebar.
+   * La transformación se aplica dependiendo del estado actual del sidebar.
+   * Si el estado es `ISidebarState.Hidden`, el sidebar se desplaza fuera de la vista.
+   * Si el estado es visible, el sidebar se muestra en su posición original.
+   */
   getSidebarStyles() {
     const width = `${this.getSidebarWidth()}px`;
     const currentState = this.sidebarState.value;
@@ -99,6 +136,11 @@ export class LayoutService {
     return marginLeft;
   }
 
+  /**
+   * Determina si el texto del menú debe mostrarse basado en el ancho de la pantalla y el estado actual de la barra lateral.
+   *
+   * @returns {boolean} `true` si el texto del menú debe mostrarse, `false` en caso contrario.
+   */
   getTextMenuShow() {
     const screenWidth = window.innerWidth;
     const currentState = this.sidebarState.value;
@@ -111,6 +153,11 @@ export class LayoutService {
     return true;
   }
 
+  /**
+   * Obtiene el icono del menú basado en el estado actual de la barra lateral y el ancho de la pantalla.
+   *
+   * @returns {string} El nombre del icono del menú.
+   */
   getIconMenu(): string {
     const screenWidth = window.innerWidth;
     const currentState = this.sidebarState.value;
@@ -127,6 +174,11 @@ export class LayoutService {
     }
   }
 
+  /**
+   * Obtiene los estilos de la barra de logotipo en función del ancho de la pantalla y el estado actual de la barra lateral.
+   *
+   * @returns Un objeto con el ancho de la barra de logotipo.
+   */
   getLogoBarStyles() {
     const screenWidth = window.innerWidth;
     const currentState = this.sidebarState.value;
@@ -141,6 +193,11 @@ export class LayoutService {
     return { width: width };
   }
 
+  /**
+   * Obtiene los estilos de contenido basados en el ancho de la pantalla y el estado actual de la barra lateral.
+   *
+   * @returns Un objeto con el estilo de margen izquierdo (`marginLeft`) adecuado según el ancho de la pantalla y el estado de la barra lateral.
+   */
   getContentStyles() {
     const screenWidth = window.innerWidth;
     const currentState = this.sidebarState.value;
@@ -159,6 +216,11 @@ export class LayoutService {
     return { marginLeft: marginLeft };
   }
 
+  /**
+   * Determina si se debe mostrar una superposición (overlay) basada en el ancho de la pantalla y el estado de la barra lateral.
+   *
+   * @returns {boolean} `true` si el ancho de la pantalla es menor que el punto de interrupción definido y el estado de la barra lateral es expandido; de lo contrario, `false`.
+   */
   getOverlayShow() {
     const screenWidth = window.innerWidth;
     if (
@@ -170,6 +232,15 @@ export class LayoutService {
     return false;
   }
 
+  /**
+   * Actualiza el estado de la barra lateral basado en el ancho de la pantalla.
+   *
+   * - Si el ancho de la pantalla es menor que `BREAKPOINTMD`, la barra lateral se oculta.
+   * - Si el ancho de la pantalla es menor que `BREAKPOINTLG` pero mayor o igual a `BREAKPOINTMD`, la barra lateral se compacta.
+   * - Si el ancho de la pantalla es mayor o igual a `BREAKPOINTLG`, la barra lateral se expande.
+   *
+   * @private
+   */
   private updateSidebarState() {
     const screenWidth = window.innerWidth;
 

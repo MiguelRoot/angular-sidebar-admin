@@ -1,6 +1,7 @@
 import {
   Component,
   ElementRef,
+  inject,
   Input,
   Renderer2,
   SimpleChanges,
@@ -16,11 +17,11 @@ export class IconComponent {
   @Input() name: string = '';
   @Input() size: string = '';
 
-  constructor(
-    private http: HttpClient,
-    private el: ElementRef,
-    private renderer: Renderer2
-  ) {}
+  private http = inject(HttpClient);
+  private el = inject(ElementRef);
+  private renderer = inject(Renderer2);
+
+  constructor() {}
 
   ngOnInit(): void {
     this.loadIcon();
@@ -32,6 +33,16 @@ export class IconComponent {
     }
   }
 
+  /**
+   * Carga un ícono SVG desde la carpeta de assets y lo inserta en el elemento nativo.
+   *
+   * - Construye la URL del ícono basado en el nombre del ícono.
+   * - Realiza una solicitud HTTP para obtener el contenido del SVG.
+   * - En caso de error, utiliza un SVG predeterminado.
+   * - Inserta el SVG en el elemento nativo y aplica estilos.
+   *
+   * @returns {void}
+   */
   loadIcon(): void {
     const iconUrl = `assets/icons/${this.name}.svg`;
     this.http
@@ -60,12 +71,35 @@ export class IconComponent {
       });
   }
 
+  /**
+   * Aplica estilos de contenedor al elemento SVG proporcionado.
+   *
+   * @param svgElement - El elemento SVG al que se aplicarán los estilos.
+   *
+   * @remarks
+   * Este método asegura que el SVG herede el tamaño del contenedor del componente,
+   * estableciendo el ancho y la altura al 100%.
+   */
   applyContainerStyles(svgElement: SVGElement): void {
     // Ensure the SVG inherits the size from the component's container
     this.renderer.setStyle(svgElement, 'width', '100%');
     this.renderer.setStyle(svgElement, 'height', '100%');
   }
 
+  /**
+   * Aplica estilos de tamaño al elemento SVG proporcionado.
+   *
+   * @param svgElement - El elemento SVG al que se aplicarán los estilos de tamaño.
+   *
+   * La función determina el tamaño del elemento SVG basado en el valor de `this.size`.
+   * Si `this.size` es un número, se utiliza ese valor para establecer el ancho y la altura en píxeles.
+   * Si `this.size` es una cadena, se asigna un tamaño predefinido basado en los siguientes valores:
+   * - 'small': 16px por 16px
+   * - 'large': 48px por 48px
+   * - cualquier otro valor: 24px por 24px (tamaño predeterminado)
+   *
+   * Los estilos de ancho y altura se aplican al elemento nativo utilizando el renderer.
+   */
   applySizeStyles(svgElement: SVGElement): void {
     let width, height;
     const sizeAsNumber = Number(this.size);
