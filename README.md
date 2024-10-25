@@ -6,7 +6,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Screenshot
 
-[Screenshot admin](https://github.com/MiguelRoot/angular-sidebar-admin/blob/main/src/assets/images/admin2.png)
+![chrome_ExL5RUjb8f](https://github.com/user-attachments/assets/33619d30-2324-4c2c-8347-501a89b22b13)
+
 
 ## Quick start
 
