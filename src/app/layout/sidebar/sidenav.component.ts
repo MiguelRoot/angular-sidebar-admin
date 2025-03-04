@@ -95,30 +95,7 @@ export class SidebarComponent {
           icon: 'blocks',
           routerLink: '/',
         },
-        {
-          title: 'Item 2',
-          isExpanded: false,
-          icon: 'blocks',
-          routerLink: '/',
-        },
-        {
-          title: 'Item 2',
-          isExpanded: false,
-          icon: 'blocks',
-          routerLink: '/',
-        },
-        {
-          title: 'Item 2',
-          isExpanded: false,
-          icon: 'blocks',
-          routerLink: '/',
-        },
-        {
-          title: 'Item 2',
-          isExpanded: false,
-          icon: 'blocks',
-          routerLink: '/',
-        },
+
         {
           title: 'Item 2',
           isExpanded: false,
