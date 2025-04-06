@@ -10,6 +10,6 @@ export class LoginComponent {
   private router = inject(Router);
 
   onLogin() {
-    this.router.navigate(['/admin'], { replaceUrl: true });
+    this.router.navigate(['/dashboard'], { replaceUrl: true });
   }
 }

@@ -104,8 +104,6 @@ export class LayoutService {
     const currentState = this.sidebarState.value;
     return {
       width: width,
-      // position: window.innerWidth < this.BREAKPOINTMD ? 'fixed' : 'relative',
-      // display: currentState === ISidebarState.Hidden ? 'none' : 'block',
       transform:
         currentState === ISidebarState.Hidden
           ? 'translateX(-100%)'

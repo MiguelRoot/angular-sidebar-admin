@@ -29,6 +29,7 @@ export class SidebarComponent {
   iconDefault = 'bullet'; // Icono predeterminado para los elementos secundarios
   paddingleft = 12; // Espaciado a la izquierda de los elementos secundarios
   timing = '300ms'; // Valor por defecto
+
   optionsScroll: any = {
     compact: { scrollbars: { visibility: 'hidden' } },
     expand: {
@@ -38,12 +39,24 @@ export class SidebarComponent {
       },
     },
   };
+
   currentOptionsScroll = this.optionsScroll.compact;
 
   menuData: IMenuHeader[] = [
     {
       header: 'MENU',
       menu: [
+        {
+          title: 'Item 2',
+          isExpanded: false,
+          icon: 'blocks',
+          children: [
+            {
+              title: 'Subitem 2.1',
+              isExpanded: false,
+            },
+          ],
+        },
         {
           title: 'Item 1',
           isExpanded: false,
@@ -64,17 +77,6 @@ export class SidebarComponent {
               title: 'Subitem 1.2',
               isExpanded: false,
               routerLink: '/',
-            },
-          ],
-        },
-        {
-          title: 'Item 2',
-          isExpanded: false,
-          icon: 'blocks',
-          children: [
-            {
-              title: 'Subitem 2.1',
-              isExpanded: false,
             },
           ],
         },

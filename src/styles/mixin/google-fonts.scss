@@ -20,6 +20,8 @@ $fontWeightNames: (
   500: "Medium",
   600: "SemiBold",
   700: "Bold",
+  800: "ExtraBold",
+  900: "Black",
 );
 
 //---------------------------------------------
@@ -52,3 +54,32 @@ $fontWeightNames: (
     @include googleFont($font);
   }
 }
+
+//---------------------------------------------
+// 4. example of use
+//---------------------------------------------
+// @include googleFonts(
+//   (
+//     (
+//       // nombre dela fuente font-family: Public Sans
+//       "name": "PublicSans",
+//       // nombre de la carpeta en fonts
+//       "folder": "Public_Sans",
+//       // nombre del archivo de la fuente PublicSans.ttf
+//       "files": "PublicSans",
+//       // pesos de la fuente
+//       "weights": (400, 500, 600, 700)
+//     ),
+//     (
+//       "name": "PublicSans",
+//       "folder": "Public_Sans",
+//       "files": "PublicSans",
+//       "weights": (
+//         400,
+//         500,
+//         600,
+//         700,
+//       )
+//     )
+//   )
+// );

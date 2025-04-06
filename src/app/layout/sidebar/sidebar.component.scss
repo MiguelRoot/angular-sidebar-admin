@@ -5,12 +5,9 @@
 
 .sidenav {
   padding: 0 16px;
-  // max-width: 30%;
   color: var(--color-text-menu);
-  font-weight: 500;
-  // overflow-y: scroll;
+  font-weight: 600;
   max-height: calc(100vh - 72px);
-  // border-right: 1px solid #f1f1f1;
 
   &__group-title {
     color: var(--color-header-text-menu);
@@ -28,7 +25,6 @@
 
 .sidenav__item:hover > .sidenav__link {
   background-color: rgba(var(--color-bg-menu-hover-rbg), 0.08);
-  // color: var(--color-text-menu-hover);
 }
 
 .sidenav__link {
@@ -40,7 +36,7 @@
   text-decoration: none;
   cursor: pointer;
   transition: padding-left 300ms ease-in-out;
-  border-radius: 8px;
+  border-radius: 6px;
   &:hover {
     color: var(--color-primary);
   }
@@ -58,10 +54,9 @@
 }
 
 .sidenav__item-down {
-  transition: transform 300ms ease-in-out;
+  transition: transform 250ms ease-in-out;
   display: flex;
   align-items: center;
-  // transform: rotate(90deg);
 }
 
 .sidenav__item-down.rotate {
@@ -70,7 +65,7 @@
 
 .sidenav__wrap {
   overflow: hidden;
-  transition: height 300ms ease-in-out;
+  transition: height 250ms ease-in-out;
 }
 
 // start css hover menu
@@ -79,14 +74,12 @@
   height: auto !important;
   z-index: 11;
   overflow: initial !important;
-  // top: 0;
-  background-color: rgba(var(--color-background-rgb), 0.6);
+  background-color: rgba(var(--color-background-rgb), 0.8);
   backdrop-filter: blur(10px);
   left: 100%;
   border: 1px solid #f1f1f1;
   border-radius: 8px;
   min-width: 180px;
-  // margin-left: 21px;
 }
 
 .sidenav--hover {
@@ -105,7 +98,6 @@
   padding-bottom: 8px;
 }
 
-// hover de menu anidado
 .sidenav--hover .sidenav__item:hover > .sidenav__link {
   color: var(--color-primary);
 }

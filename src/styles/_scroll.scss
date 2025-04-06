@@ -1,1 +1,5 @@
 @import "overlayscrollbars/overlayscrollbars.css";
+/* Personaliza el handle del scrollbar (el "thumb") */
+.os-scrollbar > .os-scrollbar-track > .os-scrollbar-handle {
+  background-color: #cbd1d6 !important;
+}

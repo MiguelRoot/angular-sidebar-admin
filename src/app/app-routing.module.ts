@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
-    path: 'admin',
+    path: 'dashboard',
     loadChildren: () =>
       import('./sections/admin/admin.module').then((m) => m.AdminModule),
   },
